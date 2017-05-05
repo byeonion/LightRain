@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}LightRain - Article{% endblock %}
+
+{% block page_content %}
+<div class="article">
+    <img class="img-rounded profile-thumbnail" src="{{ article.gravatar(size=128) }}">
+    <li class="article-detail">
+        <div class="article">
+            <p>
+                <div class="article-title">
+                    <span style="font-size:40px;font-family:"黑体";">{{ article.title }}</span>
+                </div>
+                <div class="article-author"><span style="font-size:24px;color:blue;">作者:LightRain</span></div>
+                <div class="article-date">
+                <span style="font-size:15px;color:Brown;">目录:{{ article.list.listname }}</span>
+                <span style="font-size:16px;">发布时间:{{ moment(article.timestamp).fromNow() }}</span>
+                </div>
+            </p>
+            <div class="article-body"><span style="font-size:16px;">{{ article.body }}</span></div>
+        </div>
+    </li>
+</div>
+{% endblock %}

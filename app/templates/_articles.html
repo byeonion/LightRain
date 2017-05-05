@@ -1,0 +1,33 @@
+<ul class="articles">
+    {% for article in articles %}
+    <li class="article">
+        <p>           
+            <div class="article-detail">
+                <img class="img-rounded profile-thumbnail" src="{{ article.gravatar(size=25) }}">
+                <a href="{{ url_for('.article', id=article.id) }}">
+                    <span style="font-size:20px;font-family:"黑体";">{{ article.title }}</span>
+                </a>
+                <span style="font-size:15px;color:Brown;">目录:{{ article.list.listname }}</span>
+                <span style="font-size:14px;">发布时间:{{ moment(article.timestamp).fromNow() }}</span>
+                {% if current_user.is_authenticated %}
+                    {% if count > 1 %}
+                    <a href="{{ url_for('.article_del', id=article.id) }}">
+                        <span class="label label-default" style="float:right">删除</span>
+                    </a>
+                    {% endif %}
+                <a href="{{ url_for('.article_edit', id=article.id) }}">
+                    <span class="label label-default" style="float:right">编辑</span>
+                </a>
+                <a href="{{ url_for('.article_add') }}">
+                    <span class="label label-default" style="float:right">添加</span>
+                </a>
+                {% else %}
+                <a href="{{ url_for('.article', id=article.id) }}">
+                    <span class="label label-default" style="float:right">文章地址</span>
+                </a>
+                {% endif %}
+            </div>
+        </p>
+    </li>
+    {% endfor %}
+</ul>
