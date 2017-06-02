@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}LightRain{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>删除目录: {{ list.listname }}并将该目录文章放入"未分类"? </h1>
+</div>
+
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+</div>
+<div class='page-header'>
+<a href="{{ url_for('main.lists') }}">
+    <span class="label label-default">取消操作</span>
+</a>
+</div>
+{% endblock %}

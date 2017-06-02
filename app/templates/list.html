@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}LightRain - List{% endblock %}
+
+{% block page_content %}
+<div class="list">
+    <li class="list-detail">
+        <p>
+            <span style="font-size:40px;font-family:"黑体";">{{ list.listname }}</span>
+        </p>
+    </li>
+</div>
+<ul class="articles">
+    {% for article in articles %}
+    <li class="article">
+        <p>           
+            <div class="article-detail">
+                <img class="img-rounded profile-thumbnail" src="{{ article.gravatar(size=25) }}">
+                <a href="{{ url_for('.article', id=article.id) }}">
+                    <span style="font-size:20px;font-family:"黑体";">{{ article.title }}</span>
+                </a>
+                <span style="font-size:15px;color:Brown;">目录:{{ article.list.listname }}</span>
+                <span style="font-size:14px;">发布时间:{{ moment(article.timestamp).fromNow() }}</span>
+                <span style="font-size:14px;">最后一次编辑:{{ moment(article.lastedit).fromNow() }}</span>
+                <a href="{{ url_for('.article', id=article.id) }}">
+                    <span class="label label-default" style="float:right">文章地址</span>
+                </a>
+                
+            </div>
+        </p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

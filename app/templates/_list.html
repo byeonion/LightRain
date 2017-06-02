@@ -1,0 +1,32 @@
+<ul class="lists">
+    <div class="article_add">
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('.list_add') }}">
+                        <span class="label label-default">+添加目录</span>
+        </a>
+    {% endif %}    
+    </div>
+    {% for list in lists %}
+    <li class="list">
+        <p>           
+            <div class="list-detail">
+                <a href="{{ url_for('.list', id=list.id) }}">
+                    <span style="font-size:40px;font-family:"黑体";">{{ list.listname }}</span>
+                    <span style="font-size:25px;"> ( 共{{ list.articles.count() }}篇 )</span>
+                </a>
+                
+                {% if current_user.is_authenticated %}
+                    {% if list.listname != '未分类' %}
+                    <a href="{{ url_for('main.confirmList', id=list.id) }}">
+                        <span class="label label-default" style="float:right">删除</span>
+                    </a>
+                    <a href="{{ url_for('.list_edit', id=list.id) }}">
+                        <span class="label label-default" style="float:right">编辑</span>
+                    </a>
+                    {% endif %}
+                {% endif %}                   
+            </div>
+        </p>
+    </li>
+    {% endfor %}
+</ul>
